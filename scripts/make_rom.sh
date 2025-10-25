@@ -99,6 +99,14 @@ fi
 trap 'PRINT_BUILD_OUTCOME' EXIT
 trap 'echo' INT
 
+echo -e "- Deleting source super.img..."
+rm -rf $FW_DIR/SM-S938B_EUX/super.img
+rm -rf $FW_DIR/SM-S938B_EUX/system_a.img
+rm -rf $FW_DIR/SM-S938B_EUX/product_a.img
+    
+echo -e "Deleting target super.img..."
+rm -rf $FW_DIR/${TARGET_ASSERT_MODEL}_EUX/super.img
+
 if $BUILD_ROM; then
     [ -d "$APKTOOL_DIR" ] && rm -rf "$APKTOOL_DIR"
     [ -f "$WORK_DIR/.completed" ] && rm -f "$WORK_DIR/.completed"
