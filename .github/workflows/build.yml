@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [a51, a52sxq, a71, a73xq, m52xq, r9q, r9q2]
+        target: [r9q, r9q2]
 
     steps:
       - name: Checkout repo
@@ -81,7 +81,13 @@ jobs:
         run: |
           source ./buildenv.sh ${{ matrix.target }}
           ./scripts/extract_fw.sh --ignore-source
-
+          
+      - name: Cleanup out/odin and leave placeholder
+        run: |
+          rm -rf out/odin/SM-S916B_XTC
+          mkdir -p out/odin/SM-S916B_XTC
+          touch out/odin/SM-S916B_XTC/.downloaded
+          
       - name: Build ROM
         run: |
           source ./buildenv.sh ${{ matrix.target }}
